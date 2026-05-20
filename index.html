@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bambani Logistics</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
+        function App() {
+            const [view, setView] = useState('b');
+            const [payStatus, setPayStatus] = useState('i');
+            if (view === 'b') return (
+                <div className="bg-blue-900 h-screen p-6 text-white">
+                    <h1 className="text-2xl font-bold text-yellow-500 mb-8">Bambani Logistics</h1>
+                    <button onClick={() => setView('l')} className="w-full p-6 bg-yellow-500 text-black font-bold rounded-2xl mb-4">Hot Shot Dispatch</button>
+                    <button onClick={() => setView('p')} className="w-full p-6 bg-white text-blue-900 font-bold rounded-2xl">Billing & Payments</button>
+                </div>
+            );
+            return (
+                <div className="p-6 bg-gray-100 h-screen text-blue-900">
+                    <h2 className="text-xl font-bold mb-4">Billing & Payments</h2>
+                    <div className="bg-white p-6 rounded-2xl mb-6">
+                        <p>Monthly Subscription</p>
+                        <h1 className="text-4xl font-bold">R 1,500</h1>
+                    </div>
+                    {payStatus === 'i' ? (
+                        <button onClick={() => setPayStatus('c')} className="w-full p-6 bg-blue-900 text-white font-bold rounded-2xl">PAY NOW</button>
+                    ) : (
+                        <div className="bg-green-100 p-6 rounded-2xl text-center">
+                            <p className="font-bold">Payment Confirmed!</p>
+                            <button onClick={() => window.print()} className="mt-4 w-full p-4 bg-green-800 text-white rounded-xl font-bold">PRINT RECEIPT</button>
+                        </div>
+                    )}
+                    <button onClick={() => setView('b')} className="mt-4 w-full p-4 border border-blue-900 rounded-xl">Back</button>
+                </div>
+            );
+        }
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>
